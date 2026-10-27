@@ -1,0 +1,533 @@
+
+/* =========================
+   기본 설정
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+
+:root {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #393149;
+  background: #f8f6fc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --primary: #8565c5;
+  --primary-dark: #7050b1;
+  --primary-light: #f0eafb;
+  --text-main: #393149;
+  --text-sub: #81798e;
+  --border: #e9e3f3;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+textarea,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #cbb8f0;
+  outline-offset: 3px;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* =========================
+   전체 레이아웃
+========================= */
+.app {
+  width: min(100% - 40px, 760px);
+  margin: 0 auto;
+  padding: 30px 0 24px;
+}
+
+/* =========================
+   상단 헤더
+========================= */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 66px;
+}
+
+.logo {
+  color: #5e478c;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.tag {
+  padding: 8px 13px;
+  color: #8065b0;
+  background: #eee8fa;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* =========================
+   메인 소개 영역
+========================= */
+.hero {
+  margin-bottom: 34px;
+  animation: fade-in 0.5s ease both;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.hero h1 {
+  margin: 0;
+  color: #292438;
+  font-size: clamp(32px, 6vw, 43px);
+  font-weight: 800;
+  line-height: 1.45;
+  letter-spacing: -2px;
+}
+
+.description {
+  margin: 20px 0 0;
+  color: var(--text-sub);
+  font-size: 14px;
+  line-height: 2;
+}
+
+/* =========================
+   학습 기록 입력 카드
+========================= */
+.note-card {
+  padding: 30px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: 0 12px 36px rgb(74 51 119 / 5%);
+  animation: fade-in 0.6s ease both;
+}
+
+.note-card label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--text-main);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.hint {
+  margin: 0 0 20px;
+  color: #9991a5;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.note-card textarea {
+  display: block;
+  width: 100%;
+  min-height: 180px;
+  padding: 18px;
+  color: var(--text-main);
+  background: #fbfaff;
+  border: 1px solid #e7e0f2;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.9;
+  resize: vertical;
+  transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease;
+}
+
+.note-card textarea::placeholder {
+  color: #b2aabd;
+}
+
+.note-card textarea:focus {
+  background: var(--white);
+  border-color: #ad96df;
+  outline: none;
+  box-shadow: 0 0 0 4px rgb(133 101 197 / 10%);
+}
+
+.note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.note-footer > span {
+  color: #a098ad;
+  font-size: 11px;
+}
+
+.note-footer button {
+  padding: 13px 19px;
+  color: var(--white);
+  background: var(--primary);
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  transition:
+          background 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+}
+
+.note-footer button:hover:not(:disabled) {
+  background: var(--primary-dark);
+  box-shadow: 0 5px 14px rgb(112 80 177 / 22%);
+  transform: translateY(-1px);
+}
+
+.note-footer button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.note-footer button:disabled {
+  background: #d9d2e5;
+  cursor: not-allowed;
+}
+
+/* =========================
+   학습 기록 목록
+========================= */
+.records-section {
+  margin-top: 48px;
+}
+
+.records-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.records-heading .eyebrow {
+  margin-bottom: 10px;
+}
+
+.records-heading h2 {
+  margin: 0;
+  color: #292438;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.record-count {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  color: #7961b1;
+  background: #eee8fa;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* 기록이 없을 때 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 42px 20px;
+  background: rgb(255 255 255 / 75%);
+  border: 1px dashed #dcd2ed;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.empty-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 14px;
+  color: var(--primary);
+  background: var(--primary-light);
+  border-radius: 15px;
+  font-size: 25px;
+  place-items: center;
+}
+
+.empty-state p {
+  margin: 0 0 8px;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.empty-state > span:last-child {
+  color: #948da2;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* 기록 목록 */
+.records-list {
+  display: grid;
+  gap: 13px;
+}
+
+.record-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px;
+  background: rgb(255 255 255 / 95%);
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  box-shadow: 0 5px 18px rgb(70 48 111 / 3%);
+  transition:
+          border-color 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+  animation: fade-in 0.3s ease both;
+}
+
+.record-item:hover {
+  border-color: #d3c4ee;
+  box-shadow: 0 8px 22px rgb(70 48 111 / 6%);
+  transform: translateY(-2px);
+}
+
+.record-icon {
+  display: grid;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  color: var(--primary);
+  background: var(--primary-light);
+  border-radius: 12px;
+  place-items: center;
+}
+
+.record-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.record-body time {
+  display: block;
+  margin: 2px 0 9px;
+  color: #958ca6;
+  font-size: 11px;
+}
+
+.record-body p {
+  margin: 0;
+  color: #40374e;
+  font-size: 14px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* 삭제 버튼 */
+.delete-button {
+  flex-shrink: 0;
+  padding: 7px 10px;
+  color: #a17b87;
+  background: #fff8fa;
+  border: 1px solid #f0e1e6;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  transition:
+          background 0.2s ease,
+          border-color 0.2s ease;
+}
+
+.delete-button:hover {
+  background: #fcecf1;
+  border-color: #eacbd5;
+}
+
+/* =========================
+   하단 문구
+========================= */
+.footer {
+  margin-top: 64px;
+  padding: 22px 0 8px;
+  color: #aaa1b8;
+  border-top: 1px solid #ebe5f3;
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+/* =========================
+   애니메이션
+========================= */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   모바일 반응형
+========================= */
+@media (max-width: 600px) {
+  .app {
+    width: min(100% - 28px, 760px);
+    padding-top: 22px;
+  }
+
+  .header {
+    margin-bottom: 48px;
+  }
+
+  .logo {
+    font-size: 15px;
+  }
+
+  .tag {
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+
+  .hero {
+    margin-bottom: 27px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+    letter-spacing: -1.5px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .note-card {
+    padding: 21px 17px;
+    border-radius: 20px;
+  }
+
+  .note-card label {
+    font-size: 15px;
+  }
+
+  .note-card textarea {
+    min-height: 160px;
+    padding: 14px;
+    font-size: 12px;
+  }
+
+  .note-footer {
+    align-items: flex-end;
+  }
+
+  .note-footer > span {
+    padding-bottom: 10px;
+  }
+
+  .note-footer button {
+    padding: 12px 13px;
+    font-size: 11px;
+  }
+
+  .records-section {
+    margin-top: 38px;
+  }
+
+  .records-heading h2 {
+    font-size: 19px;
+  }
+
+  .record-count {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .record-item {
+    gap: 10px;
+    padding: 15px 12px;
+  }
+
+  .record-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .record-body p {
+    font-size: 12px;
+  }
+
+  .delete-button {
+    padding: 6px 8px;
+  }
+
+  .footer {
+    margin-top: 45px;
+  }
+}
+
+/* 작은 모바일 화면 */
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 29px;
+  }
+
+  .note-footer {
+    flex-wrap: wrap;
+  }
+
+  .note-footer button {
+    width: 100%;
+  }
+
+  .record-item {
+    gap: 8px;
+  }
+}
+
+/* 움직임 줄이기 설정을 사용하는 경우 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
