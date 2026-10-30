@@ -10,6 +10,7 @@ type StudyRecord = {
 
 function App() {
   const [studyNote, setStudyNote] = useState('')
+  const [editingId, setEditingId] = useState<string | null>(null)
   const [records, setRecords] = useState<StudyRecord[]>(() => {
     const savedRecords = localStorage.getItem('study-records')
     return savedRecords ? JSON.parse(savedRecords) as StudyRecord[] : []
@@ -19,10 +20,30 @@ function App() {
     localStorage.setItem('study-records', JSON.stringify(records))
   }, [records])
 
+  const handleEdit =(id: string) =>{
+    const targetRecord = records.find((record)=> record.id ===id)
+
+    if(!targetRecord) return
+
+    setStudyNote(targetRecord.content)
+    setEditingId(targetRecord.id)
+
+  }
   const handleSave = () => {
     const content = studyNote.trim()
 
     if (!content) return
+
+    if(editingId){
+      setRecords((previousRecords) =>
+           previousRecords.map((record) =>
+               record.id === editingId ?{...record,content} :record,
+      ),
+     )
+      setStudyNote('')
+      setEditingId(null)
+      return
+    }
 
     const newRecord: StudyRecord = {
       id: crypto.randomUUID(),
@@ -88,8 +109,19 @@ function App() {
           <div className="note-footer">
             <span>{studyNote.length}자 입력했어요</span>
             <button onClick={handleSave} disabled={!studyNote.trim()}>
-              기록 저장하기 →
+              {editingId ? '수정 내용 저장하기 →' : '기록 저장하기 →'}
             </button>
+            {editingId && (
+                <button
+                    type="button"
+                    onClick={() => {
+                      setStudyNote('')
+                      setEditingId(null)
+                    }}
+                >
+                  수정 취소
+                </button>
+            )}
           </div>
         </section>
 
@@ -124,6 +156,14 @@ function App() {
                           title="기록 삭제"
                       >
                         삭제
+                      </button>
+                      <button
+                          className="edit-button"
+                          onClick={() => handleEdit(record.id)}
+                          aria-label="학습 기록 수정"
+                          title="기록 수정"
+                      >
+                        수정
                       </button>
                     </article>
                 ))}

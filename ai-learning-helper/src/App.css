@@ -531,3 +531,19 @@ textarea:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+.edit-button {
+  flex-shrink: 0;
+  padding: 7px 12px;
+  color: #7961b1;
+  background: #f5f1fc;
+  border: 1px solid #e7def4;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  transition: background 0.2s ease;
+}
+
+.edit-button:hover {
+  background: #eee8fa;
+}
